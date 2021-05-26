@@ -1,21 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import './mysass.scss';
 
-class MyHeader extends React.Component {
-  render() {
-    return (
-      <div>
-      <h1>Hello Style!</h1>
-      <p>Add a little style!.</p>
-      </div>
-    );
+function App() {
+  const [number1, setNumber1] = useState(0);
+  const [number2, setNumber2] = useState(0);
+  const [total, setTotal] = useState(number1 + number2);
+
+  function calculateTotal() {
+    setTotal(number1 + number2);
   }
+
+  return (
+    <div className="App">
+      <h1>Adding Two Numbers</h1>
+
+      <div className="number-inputs">
+        <input
+          type="number"
+          value={number1}
+          onChange={e => setNumber1(+e.target.value)}
+          placeholder="0"
+        />
+        <input
+          type="number"
+          value={number2}
+          onChange={e => setNumber2(+e.target.value)}
+          placeholder="0"
+        />
+      </div>
+
+      <button onClick={calculateTotal}>Add Them!</button>
+
+      <h2>{total}</h2>
+
+    </div>
+  );
 }
 
-ReactDOM.render(<MyHeader />, document.getElementById('root'));
-
-/*
-Notice that you now have three files in your project:
-'index.js', 'index.html', and 'mysass.scss'.
-*/
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App />, rootElement);
